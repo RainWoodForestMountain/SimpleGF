@@ -1,0 +1,60 @@
+﻿lua端常用API和函数类
+
+注：所有小写命名的文件为lua原生文件，大写命名的文件为继承并扩展C#类或者枚举的文件
+
+lua MDVC划分原则：
+	module：负责接受控制器的开关、休眠唤醒命令（系统命令），以及接受和发送其他命令，只能与controller交互。module不能与data和view有任何交互
+	controller：主要逻辑操作，可以直接访问module、data和view
+	data：所有的数据操作和储存，只能与controller只能与交互，不能与view交互
+	view：所有的视图操作，牵扯到视图的操作均放置在此，即使是只有少量视图操作的也不要放在controller，只能与controller直接交互，与data间接交互
+	如果view需要调用data相关的内容，则在controller中定义获取data内容的函数，然后在view中调用controller中的该函数
+
+Main.lua：lua启动函数，不能删除，不要修改，无公开接口
+
+common&system：
+    require_manager.lua：重载lua文件加载，不能删除，不要修改，无公开接口
+    define.lua：定义类，不能删除，不要修改，无公开接口
+    lua_bridge：lua桥，不能删除，不要修改
+
+    events：事件管理器
+        公开接口：
+            events.Brocast                  --广播消息
+            events.AddListener              --添加监听
+            events.RemoveListener           --移除监听
+
+    message.lua：消息构建器
+        公开接口：
+            CreateMessage                   --构建消息
+
+    utils：公共功能函数（拓展中，该类每一个函数皆有注释）
+
+base：
+    lua_module_base：lua模块基础类
+		注意：module有module_name和file_name两个参数，其中file_name为lua_module文件名，也是lua端开启module的关键字，module_name是Unity工程内模块的名称，用于读取资源。二者可以用同一个名称
+        常用接口：
+            .Kill                           --模块自关闭调用，自关闭只能调用Kill，不能调用Destroy；继承自lua_module_base的类可以直接调用
+            .LoadXXX                        --资源加载，具体见代码实现。模块内部获取资源请使用内部接口，在模块销毁时，内部会自行对资源进行引用删除以及按需卸载
+
+    lua_module_manager：lua端模块管理器
+
+    lua_controller_base：lua mvc基础架构
+    lua_data_base：mvc基础架构
+    lua_view_base：mvc基础架构
+
+	class_model：简单的基类模板，用于构建简单类结构
+
+其他模块：
+    net_module.lua：网络模块
+	player_module：	玩家模块（主玩家）
+
+数据模型：
+	player_data：玩家数据基础模型，可继承
+
+其他：
+	MessageType：	继承自C#端的MessageType
+	UILayers：		继承自C#端的UILayers
+	CommonKey：		公共键，相互对照避免冲突，继承自C#端的CommonKey类
+
+特殊的用户代码段：
+	zhushihang：	模板化的单行注释
+	zhushikuai：	模块化的块注释

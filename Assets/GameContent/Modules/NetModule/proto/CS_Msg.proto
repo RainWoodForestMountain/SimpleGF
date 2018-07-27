@@ -1,0 +1,206 @@
+
+syntax = "proto2";
+
+package cs_msg ;
+
+import "FR_Common.proto" ;
+import "Hall.proto" ;
+import "Game.proto" ;
+import "Rpc.proto" ;
+
+// ============================================================================================
+// 
+// 服务器之间的请求消息
+// server->server
+// 
+// ============================================================================================
+message CSMsg
+{
+	required fr_common.ServerToServerHead head       = 1 ; // 消息头部，客户端不需要关心此头部信息，不需要做任何填写操作
+	
+	///////////
+	// 大厅功能
+	///////////
+	
+	optional hall.RegisterReq registerreq            = 2 ; // 用户注册请求消息
+	optional hall.RegisterACK registerack            = 3 ; // 用户注册响应消息
+	
+	optional hall.LoginReq loginreq                  = 4 ; // 用户登录请求消息
+	optional hall.LoginAck loginack                  = 5 ; // 用户登录响应消息
+	
+	optional hall.EnterHallReq enterhallreq          = 6 ; // 进入大厅请求消息
+	optional hall.EnterHallAck enterhallack          = 7 ; // 进入大厅响应消息
+	
+	optional hall.SaveMoneyReq savemoneyreq          = 8 ; // 存钱请求消息
+	optional hall.SaveMoneyAck savemoneyack          = 9 ; // 存钱响应消息
+	
+	optional hall.WithdrawMoneyReq withdrawmoneyreq  = 10 ; // 取钱请求消息
+	optional hall.WithdrawMoneyAck withdrawmoneyack  = 11 ; // 取钱响应消息
+	
+	optional hall.SaveLocationReq savelocationreq    = 12 ; // 存定位信息请求消息
+	optional hall.SaveLocationAck savelocationack    = 13 ; // 存定位信息响应消息
+	
+	optional hall.GetFightingReq getfightingreq      = 14 ; // 获取战绩信息请求消息
+	optional hall.GetFightingAck getfightingack      = 15 ; // 获取战绩信息响应消息
+	
+	optional hall.GetRankReq getrankreq          	 = 16 ; // 获取排行榜请求消息
+	optional hall.GetRankAck getrankack          	 = 17 ; // 获取排行榜响应消息
+	
+	optional hall.GetNotesReq getnotesreq            = 18 ; // 获取公告请求消息
+	optional hall.GetNotesAck getnotesack            = 19 ; // 获取公告响应消息
+	
+	optional hall.CheckPaymentReq checkpaymentreq    = 20 ; // 充值核对请求消息
+	optional hall.CheckPaymentAck checkpaymentack    = 21 ; // 充值核对响应消息
+	
+	optional hall.GetEmailReq getemailreq          	 = 22 ; // 获取邮件请求消息
+	optional hall.GetEmailAck getemailack            = 23 ; // 获取邮件响应消息
+	
+	optional hall.GetAttachmentReq getattachmentreq  = 24 ; // 领取邮件附件请求消息
+	optional hall.GetAttachmentAck getattachmentack  = 25 ; // 领取邮件附件响应消息
+	
+	optional hall.ShopReq shopreq          			 = 26 ; // 获取商品列表请求消息
+	optional hall.ShopAck shopack          			 = 27 ; // 获取商品列表响应消息
+	
+	optional hall.SetEmailReadReq setemailreadreq    = 28 ; // 设置邮件已读请求消息
+	optional hall.SetEmailReadAck setemailreadack    = 29 ; // 设置邮件已读响应消息
+	
+	optional hall.AlertSignReq alertsignreq          = 30 ; // 修改签名请求消息
+	optional hall.AlertSignAck alertsignack          = 31 ; // 修改签名响应消息
+	
+	optional hall.GetGameAttributeReq getgameattributereq  = 32 ; // 获取游戏属性请求消息
+	optional hall.GetGameAttributeAck getgameattributeack  = 33 ; // 获取游戏属性响应消息
+	
+	optional hall.SendCodeReq sendcodereq          	 = 34 ; // 发验证码请求消息
+	optional hall.SendCodeAck sendcodeack            = 35 ; // 发验证码响应消息
+	
+	optional hall.AlertSafePasswordReq alertsafepasswordreq = 36 ; // 修改取款密码请求消息
+	optional hall.AlertSafePasswordAck alertsafepasswordack = 37 ; // 修改取款密码响应消息
+	
+	optional hall.GetSystemConfigReq getsystemconfigreq = 38 ; // 获取系统配置请求消息
+	optional hall.GetSystemConfigAck getsystemconfigack = 39 ; // 获取系统配置响应消息
+	
+	optional hall.SaveIDReq saveidreq          		= 40 ; // 保存身份证请求消息
+	optional hall.SaveIDAck saveidack          		= 41 ; // 保存身份证响应消息
+	
+	optional hall.GetIDReq  getidreq          		= 42 ; // 读取身份证请求消息
+	optional hall.GetIDAck  getidack          		= 43 ; // 读取身份证响应消息
+	
+	optional hall.FightingRankReq fightingrankreq   = 44 ; // 对局榜请求消息
+	optional hall.FightingRankAck fightingrankack   = 45 ; // 对局榜响应消息
+	
+	optional hall.RequestAgenceReq requestagencereq = 46 ; // 申请代理请求消息
+	optional hall.RequestAgenceAck requestagenceack = 47 ; // 申请代理响应消息
+	
+	optional hall.CheckAgenceReq checkagencereq     = 48 ; // 判断代理请求消息
+	optional hall.CheckAgenceAck checkagenceack     = 49 ; // 判断代理响应消息
+	
+	optional hall.GetCustomServiceReq getcustomservicereq     = 50 ; // 获取客服信息请求消息
+	optional hall.GetCustomServiceAck getcustomserviceack     = 51 ; // 获取客服信息响应消息
+
+	optional hall.QuickStartReq quickstartreq = 52;        	// 快速开始请求
+	optional hall.QuickStartAck quickstartack = 53;			// 快速开始响应
+	
+	optional hall.GetRoomListsReq getroomlistsreq = 56;     // 获取房间列表请求
+	optional hall.GetRoomListsAck getroomlistsack = 57;	    // 获取房间列表响应
+	
+	optional hall.GetFightingDetialReq getfightingdetialreq = 58;     // 获取对局详细信息请求请求
+	optional hall.GetFightingDetialAck getfightingdetialack = 59;	  // 获取对局详细信息请求响应
+	
+	optional hall.BroadcastNtf broadcastntf 				= 60;	 // 全局消息广播
+	optional hall.UserOfflineNtf userofflinentf             = 61; 	 // 用户下线通知消息
+    
+    optional hall.GetMatchListReq getmatchlistreq 		    = 62;	 // 获取比赛列表请求
+	optional hall.GetMatchListAck getmatchlistack           = 63; 	 // 获取比赛列表响应
+
+	optional hall.GetFightingVideoReq getfightingvideoreq 	= 64;	 // 获取比赛录像请求
+	optional hall.GetFightingVideoAck getfightingvideoack   = 65; 	 // 获取比赛录像响应
+
+	optional hall.GetPrizeCenterReq getprizecenterreq 		= 66;	 // 获取奖品中心请求
+	optional hall.GetPrizeCenterAck getprizecenterack       = 67; 	 // 获取奖品中心响应
+
+	optional hall.UseItemReq useitemreq 		     		= 68;	 //兑换奖品请求
+	optional hall.UseItemAck useitemack           			= 69; 	 //兑换奖品响应
+
+	optional hall.GetBagReq getbagreq 		     			= 70;	 //获取背包请求
+	optional hall.GetBagAck getbagack           			= 71; 	 //获取背包响应
+
+	optional hall.SaveShippingReq saveshippingreq 		    = 72;	 //保存地址请求
+	optional hall.SaveShippingAck saveshippingack           = 73; 	 //保存地址响应
+
+	optional hall.GetShippingReq getshippingreq 		    = 74;	 //获取地址请求
+	optional hall.GetShippingAck getshippingack           	= 75; 	 //获取地址响应
+
+	optional hall.GetGoodsConfigReq getgoodsconfigreq 		= 76;	 //获取物品配置请求
+	optional hall.GetGoodsConfigAck getgoodsconfigack       = 77; 	 //获取物品配置响应
+
+
+	optional hall.GetPrizeRecordReq getprizerecordreq 		= 78;	 //获取兑奖记录请求
+	optional hall.GetPrizeRecordAck getprizerecordack       = 79; 	 //获取兑奖记录响应
+
+
+	optional hall.GetCurrencyReq getcurrencyreq 			= 80;	 //获取玩家货币请求
+	optional hall.GetCurrencyAck getcurrencyack      	 	= 81; 	 //获取玩家货币响应
+
+	optional hall.GetActivityCenterReq 	getactivitycenterreq 			= 82;	//获取活动中心请求
+	optional hall.GetActivityCenterAck	getactivitycenterack      	 	= 83; 	//获取活动中心响应
+
+	optional hall.GetUserDataReq getuserdatareq 			= 84;	 //获取玩家信息请求
+	optional hall.GetUserDataAck getuserdataack      	 	= 85; 	 //获取玩家信息响应
+	
+	optional hall.PlatReq        platreq 			        = 86;	 //获取玩家信息请求
+	optional hall.PlatAck        platack      	 	        = 87; 	 //获取玩家信息响应
+
+	optional hall.GetJokeReq      getjokereq 			    = 88;	 //获取小贴士请求
+	optional hall.GetJokeAck      getjokeack     	 	    = 89; 	 //获取小贴士响应
+
+	optional hall.GetOnLineCountReq      getonlinecountreq 	= 90;	 //获取在线人数请求
+	optional hall.GetOnLineCountAck      getonlinecountack  = 91; 	 //获取在线人数响应
+	
+	optional hall.LastEventsReq      lasteventsreq 			= 92;	 //最新事件请求
+	optional hall.LastEventsAck      lasteventsack  		= 93; 	 //最新事件响应
+
+
+	//===================
+	//游戏功能
+	//===================
+	optional game.CreateRoomReq createroomreq = 200;        // 请求创建房间
+	optional game.CreateRoomAck createroomack = 201;        // 响应创建房间
+
+	optional game.EnterRoomReq enterroomreq = 202;          // 请求进入房间
+	optional game.EnterRoomAck enterroomack = 203;          // 响应进入房间
+
+	optional game.LeaveRoomReq leaveroomreq = 204;          // 请求离开
+	optional game.LeaveRoomAck leaveroomack = 205;          // 响应离开
+
+	optional game.ActionReq   actionreq = 206;              // 请求操作
+	optional game.ActionAck   actionack = 207;              // 响应操作
+	
+	optional game.GMReq   gmreq = 208;              		// GM命令请求
+	optional game.GMAck   gmack = 209;              		// GM命令响应
+	//游戏服的通知消息
+	optional game.PushMessages  pushmessages = 210;         // 推送消息
+    
+	optional game.CancelMatchReq cancelmatchreq = 211;      // 取消快速匹配请求
+	optional game.CancelMatchAck cancelmatchack = 212;	    // 取消快速匹配响应
+    
+	optional game.QuickMatchReq quickmatchreq = 213;        // 快速匹配请求
+	optional game.QuickMatchAck quickmatchack = 214;	    // 快速匹配响应
+    
+    optional game.ApplyMatchReq applymatchreq = 215;        // 比赛报名请求
+	optional game.ApplyMatchAck applymatchack = 216;	    // 比赛报名响应
+    
+    optional game.CancelApplyingReq cancelapplyingreq = 217;// 取消比赛报名请求
+	optional game.CancelApplyingAck cancelapplyingack = 218;// 取消比赛报名响应
+	
+	optional game.LookReq lookreq = 219;					// 进入观战模式请求
+	optional game.LookAck lookack = 220;					// 进入观战模式响应
+
+	optional game.CancelLookReq cancellookreq = 221;		// 取消观战模式请求
+	optional game.CancelLookAck cancellookack = 222;		// 取消观战模式响应
+	
+	//===================
+	//rpc功能
+	//===================
+	optional rpc.RpcReq rpcreq             = 1000;       // rpc请求消息
+	optional rpc.RpcAck rpcack             = 1001;       // rpc响应消息
+}

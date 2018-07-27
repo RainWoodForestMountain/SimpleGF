@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a64e5b0e436d4bed9780211ae245f7b, type: 3}
+  m_Name: bandit_Data
+  m_EditorClassIdentifier: 
+  dataName: "\u571F\u532A"
+  dragonBonesJSON: {fileID: 4900000, guid: ffc68afa536ec88439baff4bf152490b, type: 3}
+  textureAtlas:
+  - textureAtlasJSON: {fileID: 4900000, guid: 0e5c00c8fe2c62044bd149f40096eb75, type: 3}
+    texture: {fileID: 2800000, guid: 5f82eec86d5a2c54692ba5feb868a602, type: 3}
+    material: {fileID: 0}
+    uiMaterial: {fileID: 2100000, guid: c9cf79a482b00d84b859daf2b526a7ca, type: 2}

@@ -1,0 +1,89 @@
+﻿以下所有代码均已排除仅内部使用的代码
+
+注意事项：
+	运行游戏前，先执行以下命令：
+		alt+w：刷新lua warp文件
+		alt+b：快速构建资源
+	方能正常进行游戏
+
+功能类部分：
+	MainMono：启动main函数的Unity物体绑定类
+
+	PersistenceData：持久化缓存数据，无论是用文件还是Unity自身数据缓存，均写在这里
+	ProjectDatas：项目工程数据
+	CommonKey:公共键
+
+	RunningTimeData：运行时公共数据，游戏配置文件亦保存在此
+
+	DoTweenAnimation：整合了DoTween的常用动画的插件编辑器
+	Utility：常规/非字符串/非UnityAPI操作的功能函数
+	UtilityUnity：操作Unity物体或者控件的公共功能函数
+
+	Zip：对文件/文件夹/路径进行压缩或者对文件进行解压缩
+
+模块部分：
+	ModuleController：模块管理器
+		受理消息监听：MessageType.ModuleOpen，MessageType.ModuleClose
+		调用方式：消息命令
+		公开接口：无
+
+	MessageModule：消息监管、发送、创建、收集
+		调用方式：MessageModule.instance
+		公开接口：Recevive，AddListener，RemoveListener
+
+	NetworkModule：网络模块，接受消息指令，发送服务器数据
+		受理消息监听：MessageType.ServerRefreshHostAndPort，MessageType.ServerSendSocket，MessageType.ServerSendHttp
+		调用方式：消息命令
+		公开接口：无
+		特性：服务器地址和端口记录在RunningTimeData的对应键中，修改其值后发送刷新消息，可以更换服务器地址
+
+	ResourceModule：资源模块，管理加载资源，卸载资源
+		调用方式：ResourceModule.instance
+		公开接口：LoadAsset，UnloadAsset
+
+	TimeModule：计时器
+		调用方式：TimeModule.instance
+		公开接口：Register，RegisterChain，RemoveTimeNodeByID
+		
+	UIModule：UI层级管理
+		受理消息监听：MessageType.UILayersAddObject，MessageType.UILayersRefresh
+		调用方式：消息命令
+		公开接口：无
+		
+模型部分：实例化调用
+	AssetLoadRecord：资源加载记录器，记录每一个资源的加载痕迹
+	ByteBuffer：数据统一化载体
+	IDModel：生成唯一id（如果需要生成全局唯一id，需要加上标记）
+	Message：消息载体
+	MessageBody：消息体内容载体
+	MonoBase：拓展Unity的MonoBehaviour
+
+	UGUIEventListener：事件基类，单独处理了点击事件，可以设置为不受UI空间限制的点击事件，在例如新手引导等限制性点击的场景使用该事件监听
+		发送消息：MessageType.EventButtonClick
+		消息参数：关键字，该物体
+	UGUICanDrag：可拖拽物体，为GamgObject添加该组件后，在条件符合的情况下可以使用拖拽
+		发送消息：MessageType.EventBeginDrag，MessageType.EventEndDrag
+		消息参数：关键字，该物体
+	UGUIClickEventListener：可点击物体，为GamgObject添加该组件后，在条件符合的情况下可以派发点击事件
+		发送消息：MessageType.EventButtonClick，MessageType.EventButtonDoubleClick
+		消息参数：关键字，该物体
+	UGUITouchEventListener：为GamgObject添加该组件后，在条件符合的情况下可以派发触碰时间
+		发送消息：MessageType.EventOnTouchEnter，MessageType.EventOnTouchExit
+		消息参数：关键字，该物体
+
+枚举部分：
+	MessageType：消息类型
+	UILayers：UI层级
+
+编辑器快捷键部分：
+	alt+w：刷新lua warp文件
+	alt+b：快速构建资源
+	alt+c：去掉选定的物体的UGUI控件的事件监测（raycast target）
+	alt+shift+b：打开构建资源窗口
+	alt+n：打开模块创建窗口
+	alt+r：规范重命名所有模块资源
+	alt+v：快速生成VSCode的lua代码片段（参见VSCodeLuaCodeSnippetsCreater）
+	alt+y：打开运行时数据（默认）编辑器
+
+编辑器其他功能：
+	1.右键点击Project中的物体，选择find references，再选择查找路径（默认为工程路径），可以查找该资源在项目中的依赖关系
