@@ -1,7 +1,3 @@
---[[
-    创建时间：2018.2.26
-    创建人：伍霖峰
-]]
 require("net_module_controller")
 
 net_module = {}

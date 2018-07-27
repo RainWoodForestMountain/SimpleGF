@@ -1,8 +1,5 @@
 --[[
-    创建时间：2018-02-27
-    创建人：伍霖峰
     内容简介：
-        
 ]]
 require("loginbackground_module_controller")
 

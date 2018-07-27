@@ -1,4 +1,3 @@
-
 dialog_module_view = {}
 
 function dialog_module_view.New(_controller, _uiLayer)

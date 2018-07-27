@@ -2,9 +2,6 @@
     注意：请不要在ToLua路径下编写自己的lua文件，这是系统lua文件存放路径
 	lua端出除了由lua_bridge和utils与C#端交互外，不直接交互C#，如果非要交互，另外再写一个bridge，原则上做到lua与C#的交互为单线节点交互
 	Unity端的GameObject物体以及系统Component组件可以由Lua自由交互
-	
-    创建时间：2018.2.26
-    创建人：伍霖峰
 ]]
 --main只加载system中的文件
 require "system.class"
